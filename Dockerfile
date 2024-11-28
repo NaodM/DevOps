@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 # Set the working directory in the image
-WORKDIR /app
+WORKDIR /1st build
 
 # Copy the files from the host file system to the image file system
 COPY . /app
