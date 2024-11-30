@@ -1,10 +1,10 @@
 FROM ubuntu:latest
 
 # Set the working directory in the image
-WORKDIR /1st build
+WORKDIR /app
 
 # Copy the files from the host file system to the image file system
-COPY . app.py
+COPY app.py /app/
 
 # Run updates and install dependencies in a non-interactive way
 RUN apt-get update && \
