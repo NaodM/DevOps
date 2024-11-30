@@ -7,15 +7,19 @@ pipeline {
         DOCKER_HOST = "ec2-user@54.237.186.31"    // Your Docker EC2 public IP
     }
 
-    stages {
+
+
         stage('Checkout') {
-            steps {
-                // Clone the private GitHub repository using your PAT
-                withCredentials([string(credentialsId: 'github-pat', variable: 'GITHUB_PAT')]) {
-                    sh 'git clone https://${GITHUB_PAT}@github.com/NaodM/DevOps.git .'
-                }
-            }
+             steps {
+        // Use Username with Password credentials to clone the repository
+                withCredentials([usernamePassword(credentialsId: 'github-pat', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
+                sh '''
+                git clone https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/NaodM/DevOps.git .
+                 '''
         }
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
